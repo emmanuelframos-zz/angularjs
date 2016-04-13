@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="customersApp">
+    <head>
+        <title>Controllers, Scope and Modules</title>
+    </head>
+    <body ng-controller="customersController">    
+        <h2>Customers</h2>
+        <label>Filter:</label> <input type="text" ng-model="customerFilter.name"/>
+        <br /><br />
+        <table>
+            <tr>
+                <th ng-click="doSort('name')">Name</th>
+                <th ng-click="doSort('age')">Age</th>
+                <th ng-click="doSort('city')">City</th>
+                <th ng-click="doSort('salary')">Salary</th>
+                <th ng-click="doSort('birthDate')">Birth Date</th>
+            </tr>
+            <tr ng-repeat="customer in customers | filter:customerFilter | orderBy:sortBy:reverse">
+                <td>{{customer.name}}</td>
+                <td>{{customer.age}}</td>
+                <td>{{customer.city}}</td>
+                <td>{{customer.salary | currency:'USD '}}</td>
+                <td>{{customer.birthDate | date:'dd-MM-yyyy'}}</td>
+            </tr>
+        </table>
+        <span>Total Customers: {{customers.length}}
+        <script src="angular.js"></script>
+        <script src="app/app.js"></script>
+        <script src="app/controllers/customer-ctrl.js"></script>            
+    </body>
+</html>
