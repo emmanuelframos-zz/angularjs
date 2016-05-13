@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="customersApp" ng-cloak>
+
+<head>
+    <title>Factories and Services</title>
+</head>
+
+<body ng-controller="CustomersController">
+    <div>
+        <h3>{{appSettings.title}}</h3>
+        <label>Filter:</label> <input type="text" ng-model="customerFilter.name" />
+        <br /><br />
+        <table>
+            <tr>
+                <th ng-click="doSort('name')">Name</th>
+                <th ng-click="doSort('age')">Age</th>
+                <th ng-click="doSort('city')">City</th>
+                <th ng-click="doSort('salary')">Salary</th>
+                <th ng-click="doSort('birthDate')">Birth Date</th>
+            </tr>
+            <tr ng-repeat="customer in customers | filter:customerFilter | orderBy:sortBy:reverse">
+                <td>{{customer.name}}</td>
+                <td>{{customer.age}}</td>
+                <td>{{customer.city}}</td>
+                <td>{{customer.salary | currency:'USD '}}</td>
+                <td>{{customer.birthDate | date:'dd-MM-yyyy'}}</td>
+            </tr>
+        </table>
+        <span>Total Customers: {{customers.length}}
+        <br />
+        <h3>My city: {{location.RestResponse.result.city}}</h3>        
+    </div>
+    <br /><br />
+    
+    <script src="angular.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/values.js"></script>
+    <script src="app/controllers/customer-ctrl.js"></script>
+    <script src="app/services/customerFactory.js"></script>
+    <script src="app/services/locationService.js"></script>
+      
+    <footer>Version {{appSettings.version}}</footer>    
+  
